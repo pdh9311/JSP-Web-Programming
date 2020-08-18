@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>ch10_securityFORM</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <!-- 시큐리티 역할 설정 -->
+  <security-role>
+  	<role-name>manager</role-name>
+  </security-role>
+  <!-- 시큐리티 제약 사항 설정 -->
+  <security-constraint>
+  	<!-- 웹 자원에 대한 접근 설정 -->
+  	<web-resource-collection>
+  		<web-resource-name>securityFORM</web-resource-name>
+  		<url-pattern>/secured/*</url-pattern>
+  		<http-method>GET</http-method>
+  		<http-method>POST</http-method>
+  	</web-resource-collection>
+  	<!-- 권한있는 사용자만 웹 자원에 접근할 수 있도록 설정 -->
+  	<auth-constraint>
+  		<description></description>
+  		<role-name>manager</role-name>
+  	</auth-constraint>
+  </security-constraint>
+  <!-- 시큐리티 인증 설정 -->
+  <login-config>
+  	<auth-method>FORM</auth-method>
+  	<!-- 인증 처리를 위한 로그인 및 오류 페이지 설정 -->
+  	<form-login-config>
+  		<form-login-page>/security/login.jsp</form-login-page>
+  		<form-error-page>/security/login_failed.jsp</form-error-page>
+  	</form-login-config>
+  </login-config>
+</web-app>
